@@ -4,7 +4,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import sklearn
 
 from sklearn.datasets import load_iris
 
@@ -55,6 +54,35 @@ for i in range(3):
             ax[i, j].set_ylabel(iris['feature_names'][i + 1])
         if j > i:
             ax[i, j].set_visible(False)
-plt.show()
+# plt.show()
 
 # Plots show relatively well separated classes. We will use k-nearest neighbor classifier to separate out
+# All machine learning models in scikit-learn are in their own class, the Estimator class.
+
+# Use KNeighborsClassifier class and use an instance
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=1)
+
+# Build the model on the training set using fit
+knn.fit(X_train, y_train)
+# KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski', metric_params=None, n_jobs=1, n_neighbors=1,
+#                      p=2, weights='uniform')
+
+# Create test data with one flower
+X_new = np.array([[5, 2.9, 1, 0.2]])
+print(X_new.shape)
+
+# Predict with knn. Our prediction shows us 0, which means it's Setosa
+prediction = knn.predict(X_new)
+print(prediction)
+
+# Evaluate the model. Use predictions for iris using test data and compare it against its label (the known species)
+# Compute accuracy, fraction of flowers for which the right species was predicted
+y_pred = knn.predict(X_test)
+print(X_test)
+# Array of boolean values. When mean is calculated here, it will treat true as 1 and false as 0
+# print(y_pred == y_test)
+# print(np.mean(y_pred == y_test))
+
+# Can also use knn.score to compute the test set accuracy
+print(knn.score(X_test, y_test))
