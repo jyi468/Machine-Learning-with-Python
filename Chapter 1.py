@@ -60,7 +60,7 @@ X_train, X_test, y_train, y_test = train_test_split(iris['data'], iris['target']
 # label the columns using the strings in iris_dataset.feature_names
 iris_dataframe = pd.DataFrame(X_train, columns=iris.feature_names)
 # create a scatter matrix from the dataframe, color by y_train. This will modify the plt object we imported
-grr = pd.plotting.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15), marker='o',
+grr = pd.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15), marker='o',
     hist_kwds={'bins': 20}, s=60, alpha=.8)
 # plt.show()
 
